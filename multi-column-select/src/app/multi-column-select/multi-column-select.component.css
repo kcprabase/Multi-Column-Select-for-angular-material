@@ -1,0 +1,36 @@
+ .zs-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+  }
+ /* @media (max-width: 320px) {
+    .zs-container {
+      min-width: 100%;
+    }
+  }
+  @media (max-width: 480px) {
+    .zs-container {
+      min-width: 100%;
+    }
+  }
+  .zs-container .zs-header {
+    min-height: 64px;
+  }
+  .zs-container .zs-header .mat-form-field-label {
+    font-size: 16px;
+  }
+  .zs-container .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  .zs-container .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+  .zs-container .mat-column-select {
+    overflow: initial;
+  }
+  .zs-hidden {
+    display: none;
+  }
+   */

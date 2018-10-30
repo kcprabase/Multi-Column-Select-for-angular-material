@@ -1,0 +1,79 @@
+<div class="zs-container" #zsContainer>
+  <div class="zs-header">
+    <mat-form-field class="obs-mat-container" [floatLabel]="floatLabel" [ngClass]="disabled?'disable-form-field':''">
+
+      <mat-chip-list #zsChipList>
+        <mat-chip *ngFor="let name of selectedName" [color]="white">
+          {{name}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input #searchInput
+               [matChipInputFor]="zsChipList"
+               type="text"
+               [id]="placeholder+'Id'"
+               [placeholder]="required ? placeholder + ' *' : placeholder"
+               [disabled]="disabled"
+               (keyup)="filter($event.target.value)"
+               (blur)="onBlur()"
+               (keydown.enter)="$event.preventDefault();
+                          getData($event.target.value);"
+               (keydown.backspace)="erase()"
+               [attr.aria-label]="placeholder"
+               spellcheck="false"
+               matInput
+               (focus)="searchInput.select();"
+               [matAutocomplete]="zsAuto">
+        <mat-icon matSuffix>arrow_drop_down</mat-icon>
+      </mat-chip-list>
+      <mat-autocomplete autoActiveFirstOption #zsAuto="matAutocomplete" class="bigger-mat-ac" (optionSelected)="onSelect($event.option.value, null)">
+
+        <mat-table #table [dataSource]="rows">
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()">
+              </mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <mat-checkbox [checked]="selection.isSelected(row)"
+                            (click)="$event.stopPropagation()"
+                            (change)="$event ? onSelect(row, $event) : null">
+              </mat-checkbox>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container [matColumnDef]="column" *ngFor="let column of columns">
+            <mat-header-cell *matHeaderCellDef [ngClass]="isHiddenColumn(column)?'zs-hidden':null"> {{column}} </mat-header-cell>
+
+            <mat-cell *matCellDef="let element" [ngClass]="isHiddenColumn(column)?'zs-hidden':null" matRipple>
+
+              <!-- <mat-icon *ngIf="column=='add'"
+                        [matTooltip]="'add'"
+                        class="s-24 mat-icon material-icons"
+                        role="img"
+                        aria-hidden="true"
+                        (click)="$event.stopPropagation();addAction($event,element);"
+                        style="cursor:pointer;" matRipple>add</mat-icon> -->
+              <span *ngIf="column!='add'">
+                {{element[column]}}
+              </span>
+
+            </mat-cell>
+
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-option *matRowDef="let row; columns: displayedColumns"
+                      [ngClass]="{'blue-50':row[valueField] == selectedId}"
+                      matRipple
+                      [value]="row">
+            <mat-row (click)="onSelect(row, $event)"></mat-row>
+          </mat-option>
+        </mat-table>
+
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+</div>
