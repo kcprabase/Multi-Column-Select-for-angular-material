@@ -6,17 +6,17 @@ Features:
 - Multiselect
 - Data binding
 
-- Single select
-![](screenshots/select.png) 
+# Single select
+![](screenshots/select.PNG) 
 
-- Multi select
-![](screenshots/multiselect.png)
+# Multi select
+![multi select](screenshots/multiselect.PNG)
 
-- Search 
-![](screenshots/search.png) 
+# Search 
+![](screenshots/search.PNG) 
 
-- Search any column
-![](screenshots/search2.png)
+# Search any column
+![](screenshots/search2.PNG)
 
 Author
 ------
