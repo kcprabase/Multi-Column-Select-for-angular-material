@@ -1,0 +1,16 @@
+.content{
+    display: flex;
+    height: 100%;
+}
+
+.left, .right { 
+    min-width: 0 ;
+    padding:20;
+}
+
+.left{
+    flex: 0 60%; 
+}
+.right{
+    flex: 40%;
+}
